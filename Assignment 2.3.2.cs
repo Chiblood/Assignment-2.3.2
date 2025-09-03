@@ -40,9 +40,7 @@ namespace Assignment232
         private static T GetUserInput<T>(string prompt, string? parseErrorMessage = null) where T : IParsable<T>
         {
             T? value;
-            // FIX: The method was incorrectly calling itself, causing infinite recursion.
-            // It should call GetRequiredString() to get the raw user input first.
-            while (!T.TryParse(GetRequiredString(prompt), null, out value))
+            while (!T.TryParse(GetRequiredString(prompt), null, out value)) // Calls GetUserInput() to get the raw user input first.
             {
                 Console.WriteLine(parseErrorMessage ?? $"Invalid input. Please enter a valid {typeof(T).Name}.");
             }
